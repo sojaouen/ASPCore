@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebASPCorePremiereApp.Models.Auteur>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Ajouter un auteur</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Prenom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom)
+            </th>
+            <th>Livres de l'auteur</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prenom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom)
+                </td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Modifier</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Afficher</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
+                </td>
+            </tr>
+            @if (item.Livres != null)
+            {
+                foreach (var livre in item.Livres)
+                {
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => livre.Titre)
+                        </td>
+                        <td>
+                            <img alt="Photo livre" src="~/Images/@Html.DisplayFor(modelItem => livre.Photo)" width="80" height="120" />
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Modifier</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Afficher</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>

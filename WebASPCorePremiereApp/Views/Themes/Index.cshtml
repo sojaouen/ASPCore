@@ -1,0 +1,74 @@
+﻿@model IEnumerable<WebASPCorePremiereApp.Models.Theme>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Ajouter un theme</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Libelle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Libelle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Modifier</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Afficher</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
+            </td>
+        </tr>
+            @if (item.Livres != null)
+            {
+                foreach (var livre in item.Livres)
+                {
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>@Html.DisplayFor(modelItem => livre.Titre)</td>
+                        <td>@Html.DisplayFor(modelItem => livre.Resume)</td>
+                        <td><img alt="Photo livre" src="~/Images/@Html.DisplayFor(modelItem => livre.Photo)" width="80" height="120"/></td>
+                        <td></td>
+                        <td>
+                            <a asp-action="RetirerLivreDuTheme" asp-route-id="@livre.Id" class="btn btn-danger">Supprimer</a>
+                        </td>
+                        <!-- Programmer l'action RetirerLivreDuTheme du bouton Retirer
+                            Effet : Suppression du livre (dans un premier temps) -->
+                    </tr>
+
+                }
+
+
+            }
+        }
+    </tbody>
+</table>

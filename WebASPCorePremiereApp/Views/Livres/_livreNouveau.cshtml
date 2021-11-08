@@ -1,0 +1,14 @@
+﻿@model IEnumerable<WebASPCorePremiereApp.Models.Livre>
+
+<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+    Nouveautés
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    @foreach (var item in Model)
+    {
+        <a class="dropdown-item" asp-controller="Livres" asp-action="Details" asp-route-id="@item.Id">
+            @Html.DisplayFor(x => item.Titre)
+        </a>
+    }
+
+</div>
